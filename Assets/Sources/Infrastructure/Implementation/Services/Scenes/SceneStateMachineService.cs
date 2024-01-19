@@ -28,7 +28,7 @@ namespace Game.Infrastructure.Implementation.Services.Scenes
             if (_sceneFactories.TryGetValue(typeof(T), out ISceneFactory sceneFactory) == false)
                 throw new InvalidOperationException();
 
-            IState state = sceneFactory.Create();
+            IState state = sceneFactory.Create(this);
             _stateMachine.ChangeState(state);
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Game.Controllers.Scenes;
 using Game.Infrastructure.Interfaces.Services.Scenes;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace Game.App
 
         private void Awake() =>
             DontDestroyOnLoad(this);
+
+        private void Start() =>
+            _sceneService.ChangeScene<GameMenuScene>();
 
         private void Update() =>
             _sceneService?.Update(Time.deltaTime);

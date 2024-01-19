@@ -7,8 +7,15 @@ namespace Game.App.EntryPoints
     {
         private void Awake()
         {
-            if (FindObjectOfType<App>() == null)
+            if (Application.isEditor)
+            {
+                if (FindObjectOfType<App>() == null)
+                    new AppFactory().Create();
+            }
+            else
+            {
                 new AppFactory().Create();
+            }
         }
     }
 }

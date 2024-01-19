@@ -4,6 +4,6 @@ namespace Game.Infrastructure.Interfaces.Factories.Scenes
 {
     public interface ISceneFactory
     {
-        IScene Create();
+        IScene Create(ISceneChanger sceneChanger);
     }
 }

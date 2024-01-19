@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Controllers.Scenes;
+using Game.Infrastructure.Implementation.Factories.Scenes;
 using Game.Infrastructure.Implementation.Services.Scenes;
 using Game.Infrastructure.Implementation.StateMachines;
 using Game.Infrastructure.Interfaces.Factories.Scenes;
@@ -14,14 +16,20 @@ namespace Game.App
             App app = CreateApp();
 
             var stateMachine = new StateMachineCore();
-            var sceneFactories = new Dictionary<Type, ISceneFactory>();
+            var sceneManageService = new SceneManageService();
+
+            var sceneFactories = new Dictionary<Type, ISceneFactory>()
+            {
+                [typeof(GameMenuScene)] = new GameManuSceneFactory(sceneManageService),
+            };
 
             var sceneService = new SceneStateMachineService(stateMachine, sceneFactories);
             app.Construct(sceneService);
+
             return app;
         }
 
-        private static App CreateApp() =>
+        private App CreateApp() =>
             new GameObject(nameof(App)).AddComponent<App>();
     }
 }
