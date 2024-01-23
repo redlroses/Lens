@@ -9,13 +9,13 @@ namespace Game.Implementations.App
 {
     public class App : MonoBehaviour
     {
-        private IUpdateService _updateService;
+        private IUpdateHandler _updateService;
         private ISceneStateMachineService _sceneService;
 
         [Inject]
-        private void Construct(IUpdateService updateService, ISceneStateMachineService sceneService)
+        private void Construct(IUpdateHandler updateHandler, ISceneStateMachineService sceneService)
         {
-            _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
+            _updateService = updateHandler ?? throw new ArgumentNullException(nameof(updateHandler));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
             DontDestroyOnLoad(this);
         }

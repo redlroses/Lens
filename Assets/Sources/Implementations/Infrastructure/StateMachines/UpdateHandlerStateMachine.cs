@@ -4,14 +4,14 @@ using Game.Interfaces.StateMachines;
 
 namespace Game.Implementations.Infrastructure.StateMachines
 {
-    public class UpdatableStateMachine : IStateMachine, IUpdatable
+    public class UpdateHandlerStateMachine : IStateMachine, IUpdateHandler
     {
         private readonly IStateMachine _stateMachine;
 
-        private IUpdatable _updatableState;
+        private IUpdateHandler _updateHandlerState;
         private Action<float> _updateAction = _ => { };
 
-        public UpdatableStateMachine(IStateMachine stateMachine)
+        public UpdateHandlerStateMachine(IStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
         }
@@ -22,7 +22,7 @@ namespace Game.Implementations.Infrastructure.StateMachines
         {
             _stateMachine.ChangeState(state);
 
-            if (state is IUpdatable updatable)
+            if (state is IUpdateHandler updatable)
                 _updateAction = deltaTime => updatable.Update(deltaTime);
         }
 
