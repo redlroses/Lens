@@ -2,7 +2,7 @@
 
 namespace Game.Interfaces.Services
 {
-    public interface IUpdateService : IUpdatable
+    public interface IUpdateService
     {
         event Action<float> Updated;
     }

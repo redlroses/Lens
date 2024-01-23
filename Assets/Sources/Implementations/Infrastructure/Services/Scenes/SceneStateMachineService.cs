@@ -10,17 +10,17 @@ namespace Game.Implementations.Infrastructure.Services.Scenes
     {
         private readonly IStateMachine _stateMachine;
         private readonly Container _container;
-        private readonly UpdatableStateMachine _updatableStateMachine;
+        private readonly UpdateHandlerStateMachine _updateHandlerStateMachine;
 
         public SceneStateMachineService(Container container)
         {
             _container = container ?? throw new ArgumentNullException(nameof(container));
             _stateMachine = new StateMachineCore();
-            _updatableStateMachine = new UpdatableStateMachine(_stateMachine);
+            _updateHandlerStateMachine = new UpdateHandlerStateMachine(_stateMachine);
         }
 
         public void Update(float deltaTime) =>
-            _updatableStateMachine.Update(deltaTime);
+            _updateHandlerStateMachine.Update(deltaTime);
 
         public void ChangeScene<T>() where T : IScene
         {
