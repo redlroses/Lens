@@ -3,6 +3,7 @@ using Game.Implementations.Domain.Lenses;
 using Game.Implementations.Presentation.Views;
 using Game.Interfaces.Presenters;
 using Game.Interfaces.Services;
+using Game.Interfaces.Services.Lens;
 using UnityEngine;
 
 namespace Game.Implementations.Controllers.Presenters
@@ -12,6 +13,7 @@ namespace Game.Implementations.Controllers.Presenters
         private readonly Lens _lens;
         private readonly LensView _lensView;
         private readonly IUpdateService _updateService;
+        private readonly ISurfaceDeformService _deformService;
 
         public LensPresenter(Lens lens, LensView lensView, IUpdateService updateService)
         {

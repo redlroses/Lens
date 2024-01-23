@@ -4,9 +4,17 @@ namespace Game.Implementations.Domain.Lenses
 {
     public class Lens
     {
-        private Surface _frontSurface;
-        private Surface _backSurface;
-        private float _thickness;
-        private float _radius;
+        public Lens(float frontSurfaceRadius, float backSurfaceRadius, float thickness, float radius)
+        {
+            FrontSurface = new Surface(frontSurfaceRadius);
+            BackSurface = new Surface(backSurfaceRadius);
+            Thickness = thickness;
+            Radius = radius;
+        }
+
+        public Surface FrontSurface { get; set; }
+        public Surface BackSurface { get; set; }
+        public float Thickness { get; set; }
+        public float Radius { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Implementations.Domain.Lenses;
+using Game.Implementations.Domain.Lenses.Surfaces;
 using Game.Implementations.Infrastructure.Factories.Presentation.Views;
 using Game.Interfaces.Services.Scenes;
 
@@ -27,7 +28,7 @@ namespace Game.Implementations.Controllers.Scenes
         public override async void Enter()
         {
             await LoadSceneAsync();
-            var lens = new Lens();
+            var lens = new Lens(-2f, 3f, 1f, 1f);
             _lensViewFactory.Create(lens);
         }
 

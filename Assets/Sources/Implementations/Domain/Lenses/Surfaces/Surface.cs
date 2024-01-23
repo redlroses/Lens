@@ -2,11 +2,11 @@
 {
     public class Surface
     {
-        private float _curvatureRadius;
+        public float CurvatureRadius { get; set; }
 
         public Surface(float curvatureRadius)
         {
-            _curvatureRadius = curvatureRadius;
+            CurvatureRadius = curvatureRadius;
         }
     }
 }
