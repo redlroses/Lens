@@ -1,6 +1,6 @@
 ﻿using Game.Domain.Lenses.Surfaces;
 
-namespace Game.Domain.Models.Lenses
+namespace Game.Domain.Lenses
 {
     public class Lens
     {

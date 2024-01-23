@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using Game.Infrastructure.Implementation.StateMachines;
-using Game.Infrastructure.Interfaces.Factories.Scenes;
 using Game.Infrastructure.Interfaces.Services.Scenes;
 using Game.Infrastructure.Interfaces.StateMachines;
+using Reflex.Core;
 
 namespace Game.Infrastructure.Implementation.Services.Scenes
 {
     public class SceneStateMachineService : ISceneStateMachineService
     {
         private readonly IStateMachine _stateMachine;
-        private readonly IReadOnlyDictionary<Type, ISceneFactory> _sceneFactories;
+        private readonly Container _container;
         private readonly UpdatableStateMachine _updatableStateMachine;
 
-        public SceneStateMachineService(IStateMachine stateMachine, IReadOnlyDictionary<Type, ISceneFactory> sceneFactories)
+        public SceneStateMachineService(Container container)
         {
-            _stateMachine = stateMachine ?? throw new ArgumentNullException(nameof(stateMachine));
-            _sceneFactories = sceneFactories ?? throw new ArgumentNullException(nameof(sceneFactories));
-            _updatableStateMachine = new UpdatableStateMachine(stateMachine);
+            _container = container ?? throw new ArgumentNullException(nameof(container));
+            _stateMachine = new StateMachineCore();
+            _updatableStateMachine = new UpdatableStateMachine(_stateMachine);
         }
 
         public void Update(float deltaTime) =>
@@ -25,10 +24,7 @@ namespace Game.Infrastructure.Implementation.Services.Scenes
 
         public void ChangeScene<T>() where T : IScene
         {
-            if (_sceneFactories.TryGetValue(typeof(T), out ISceneFactory sceneFactory) == false)
-                throw new InvalidOperationException();
-
-            IState state = sceneFactory.Create(this);
+            IState state = _container.Construct<T>();
             _stateMachine.ChangeState(state);
         }
     }

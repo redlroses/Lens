@@ -6,11 +6,11 @@ using Game.Infrastructure.Interfaces.Services.Scenes;
 
 namespace Game.Infrastructure.Implementation.Factories.Scenes
 {
-    public class GameManuSceneFactory : ISceneFactory
+    public class GameMenuSceneFactory : ISceneFactory
     {
         private readonly SceneManageService _sceneStateMachineService;
 
-        public GameManuSceneFactory(SceneManageService sceneStateMachineService)
+        public GameMenuSceneFactory(SceneManageService sceneStateMachineService)
         {
             _sceneStateMachineService = sceneStateMachineService
                                         ?? throw new ArgumentNullException(nameof(sceneStateMachineService));
