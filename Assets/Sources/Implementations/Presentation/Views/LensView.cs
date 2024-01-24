@@ -1,6 +1,6 @@
 ﻿using Game.Implementations.Controllers.Presenters;
 using Game.Implementations.Domain.Lenses;
-using Game.Interfaces.Services.Lens;
+using Game.Interfaces.Services.Lenses;
 using UnityEngine;
 
 namespace Game.Implementations.Presentation.Views
@@ -17,8 +17,13 @@ namespace Game.Implementations.Presentation.Views
         {
             Construct(lensPresenter);
 
-            surfaceDeformService.Deform(_frontSurface.sharedMesh, lensParameters.FrontSurfaceRadius);
-            surfaceDeformService.Deform(_backSurface.sharedMesh, lensParameters.BackSurfaceRadius);
+            _frontSurface.sharedMesh = surfaceDeformService.Deform(_frontSurface.sharedMesh, lensParameters.FrontSurfaceRadius);
+            _backSurface.sharedMesh = surfaceDeformService.Deform(_backSurface.sharedMesh, lensParameters.BackSurfaceRadius);
+
+            _frontSurface.transform.position += new Vector3(0, 0, lensParameters.Thickness / 2f);
+            _backSurface.transform.position -= new Vector3(0, 0, lensParameters.Thickness / 2f);
+
+            transform.position = lensParameters.Position;
 
             Debug.Log("LensView Construct");
         }

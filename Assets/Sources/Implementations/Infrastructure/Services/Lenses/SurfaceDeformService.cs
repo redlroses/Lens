@@ -1,11 +1,11 @@
-﻿using Game.Interfaces.Services.Lens;
+﻿using Game.Interfaces.Services.Lenses;
 using UnityEngine;
 
-namespace Game.Implementations.Infrastructure.Services.Lens
+namespace Game.Implementations.Infrastructure.Services.Lenses
 {
     public class SurfaceDeformService : ISurfaceDeformService
     {
-        public void Deform(Mesh lensMesh, float radius)
+        public Mesh Deform(Mesh lensMesh, float radius)
         {
             Vector3[] originalVertices = lensMesh.vertices;
             Vector3[] normalVerts = new Vector3[originalVertices.Length];
@@ -25,8 +25,10 @@ namespace Game.Implementations.Infrastructure.Services.Lens
                 displacedVertices[i] = newVertPos;
             }
 
-            lensMesh.vertices = displacedVertices;
-            lensMesh.RecalculateNormals();
+            Mesh newMesh = Object.Instantiate(lensMesh);
+            newMesh.vertices = displacedVertices;
+            newMesh.RecalculateNormals();
+            return newMesh;
         }
     }
 }

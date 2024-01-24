@@ -5,6 +5,7 @@ using Game.Implementations.Domain.Lenses;
 using Game.Implementations.Domain.Lenses.Surfaces;
 using Game.Implementations.Infrastructure.Factories.Presentation.Views;
 using Game.Interfaces.Services.Scenes;
+using UnityEngine;
 
 namespace Game.Implementations.Controllers.Scenes
 {
@@ -28,7 +29,7 @@ namespace Game.Implementations.Controllers.Scenes
         public override async void Enter()
         {
             await LoadSceneAsync();
-            var lens = new Lens(-2f, 3f, 1f, 1f);
+            var lens = new Lens(new Vector3(0, 0, -3f), 1.5f, 2f, 0.5f, 1f, 1.5f);
             _lensViewFactory.Create(lens);
         }
 

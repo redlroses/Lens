@@ -3,7 +3,7 @@ using Game.Implementations.Controllers.Presenters;
 using Game.Implementations.Domain.Lenses;
 using Game.Implementations.Infrastructure.Factories.Controllers;
 using Game.Implementations.Presentation.Views;
-using Game.Interfaces.Services.Lens;
+using Game.Interfaces.Services.Lenses;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
