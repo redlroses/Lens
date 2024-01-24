@@ -1,4 +1,5 @@
-﻿using Game.Implementations.Domain.Lenses;
+﻿using System;
+using Game.Implementations.Domain.Lenses;
 using Game.Interfaces.Services.Lenses;
 using UnityEngine;
 
@@ -6,15 +7,28 @@ namespace Game.Implementations.Infrastructure.Services.Lenses
 {
     public class RefractService : IRefractService
     {
-        private float _lensDiameter;
         private float _refractiveIndexAir = 1f;
         private float _refractiveIndexSphere = 1.5f;
-        private float _spread = 0.1f;
 
         private Transform frontGo = new GameObject("FrontSurfaceFocus").transform;
         private Transform backGo = new GameObject("BackSurfaceFocus").transform;
 
-        public bool TryRefract(Lens lens, Ray enteredRay, out Ray refractedRay)
+        public void Refract(Tube tube)
+        {
+            for (int i = -2; i <= 2; i++)
+            {
+                Vector3 offset = new Vector3(0, i * 0.25f, 0);
+                Ray refractedRay = new Ray(Vector3.zero + offset, -Vector3.forward);
+
+                foreach (Lens lens in tube.Lenses)
+                {
+                    if (TryRefract(lens, refractedRay, out refractedRay) == false)
+                        break;
+                }
+            }
+        }
+
+        private bool TryRefract(Lens lens, Ray enteredRay, out Ray refractedRay)
         {
             if (frontGo == null)
                 frontGo = new GameObject("FrontSurfaceFocus").transform;

@@ -3,6 +3,7 @@ using Game.Implementations.Infrastructure.Factories.Presentation.Views;
 using Game.Implementations.Infrastructure.Services;
 using Game.Implementations.Infrastructure.Services.Lenses;
 using Game.Implementations.Infrastructure.Services.Scenes;
+using Game.Implementations.Presentation.Views;
 using Game.Interfaces.Services;
 using Game.Interfaces.Services.Lenses;
 using Game.Interfaces.Services.Scenes;
@@ -22,6 +23,8 @@ namespace Game.Implementations.Installers
             builder.AddSingleton(typeof(RefractService), typeof(IRefractService));
             builder.AddSingleton(typeof(LensPresenterFactory));
             builder.AddSingleton(typeof(LensViewFactory));
+            builder.AddSingleton(typeof(TubePresenterFactory));
+            builder.AddSingleton(typeof(TubeViewFactory));
         }
     }
 }

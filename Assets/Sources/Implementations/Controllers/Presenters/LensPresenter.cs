@@ -15,7 +15,6 @@ namespace Game.Implementations.Controllers.Presenters
         private readonly IUpdateService _updateService;
         private readonly IRefractService _refractService;
         private readonly ISurfaceDeformService _deformService;
-        private float _spread = 0.1f;
 
         public LensPresenter(Lens lens, LensView lensView, IUpdateService updateService, IRefractService refractService)
         {
@@ -27,42 +26,10 @@ namespace Game.Implementations.Controllers.Presenters
 
         public void Enable()
         {
-            _updateService.Updated += OnUpdate;
         }
 
         public void Disable()
         {
-            Debug.Log("LensPresenter Disable");
-        }
-
-        private void OnUpdate(float deltaTime)
-        {
-            _refractService.TryRefract(
-                _lens,
-                new Ray(Vector3.zero + new Vector3(0, _spread * 2f, 0), -Vector3.forward),
-                out var refractedRay);
-
-            _refractService.TryRefract(
-                _lens,
-                new Ray(Vector3.zero + new Vector3(0, _spread, 0), -Vector3.forward),
-                out refractedRay);
-
-            _refractService.TryRefract(
-                _lens,
-                new Ray(Vector3.zero + new Vector3(0, 0, 0), -Vector3.forward),
-                out refractedRay);
-
-            _refractService.TryRefract(
-                _lens,
-                new Ray(Vector3.zero + new Vector3(0, -_spread, 0), -Vector3.forward),
-                out refractedRay);
-
-            _refractService.TryRefract(
-                _lens,
-                new Ray(Vector3.zero + new Vector3(0, -_spread * 2f, 0), -Vector3.forward),
-                out refractedRay);
-
-            Debug.Log("UpdateLens " + deltaTime);
         }
     }
 }

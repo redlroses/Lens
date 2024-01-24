@@ -15,7 +15,7 @@ namespace Game.Implementations.Presentation.Views
             LensParameters lensParameters,
             ISurfaceDeformService surfaceDeformService)
         {
-            Construct(lensPresenter);
+            base.Construct(lensPresenter);
 
             _frontSurface.sharedMesh = surfaceDeformService.Deform(_frontSurface.sharedMesh, lensParameters.FrontSurfaceRadius);
             _backSurface.sharedMesh = surfaceDeformService.Deform(_backSurface.sharedMesh, lensParameters.BackSurfaceRadius);
